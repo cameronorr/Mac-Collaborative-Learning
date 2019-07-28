@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { check } = require('express-validator');
+
 // @route       POST api/votes
 // @desc        Add vote
 // @access      Private

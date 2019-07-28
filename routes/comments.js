@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const { check } = require('express-validator');
+const auth = require('../middleware/auth');
+
 // @route       GET api/comments
 // @desc        Get Current Question
 // @access      Public
