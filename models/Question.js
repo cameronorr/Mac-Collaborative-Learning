@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const QuestionSchema = mongoose.Schema({
   user: {
-    type: mongoose.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
   question: {
@@ -10,20 +10,20 @@ const QuestionSchema = mongoose.Schema({
     required: true,
     unique: true
   },
-  class: {
+  classCode: {
     type: String,
     required: true
   },
   likes: [
     {
-      type: mongoose.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'user'
     }
   ],
   comments: [
     {
       user: {
-        type: mongoose.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
       },
       text: {

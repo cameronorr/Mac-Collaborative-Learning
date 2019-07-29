@@ -33,14 +33,14 @@ const UserSchema = mongoose.Schema({
       },
       likes: [
         {
-          type: mongoose.ObjectId,
+          type: mongoose.Schema.Types.ObjectId,
           ref: 'user'
         }
       ],
       comments: [
         {
           user: {
-            type: mongoose.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'user'
           },
           text: {
