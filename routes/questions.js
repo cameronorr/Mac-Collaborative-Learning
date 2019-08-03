@@ -15,7 +15,7 @@ router.get(
     check(
       'classCode',
       'Class code entered does not have any questions assosiated with it'
-    ).custom(async ({ req }) => {
+    ).custom(async req => {
       const { classCode } = req.body;
       try {
         question = await Question.findOne({ classCode });
@@ -65,7 +65,7 @@ router.post(
     [
       check('classCode', 'Class code is required').exists(),
       check('question', 'Question is required').exists(),
-      check('question', 'Question must be unique').custom(async ({ req }) => {
+      check('question', 'Question must be unique').custom(async req => {
         try {
           const question = await Question.findOne({
             question: req.body.question
@@ -123,7 +123,7 @@ router.delete(
     auth,
     check('question', 'Question is required').exists(),
     check('question', 'Question must exist in the database').custom(
-      async ({ req }) => {
+      async req => {
         try {
           let question = await Question.findById(req.params.id);
           if (!question) {
