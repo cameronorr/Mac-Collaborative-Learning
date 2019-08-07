@@ -3,6 +3,7 @@ const router = express.Router();
 
 const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
+const Question = require('../models/Question');
 
 // @route       GET api/comments
 // @desc        Get Current Question
@@ -17,7 +18,7 @@ router.get(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      let question = await Question.findById(req.user.id);
+      let question = await Question.findById(req.question.id);
 
       res.json(question);
     } catch (error) {
@@ -62,7 +63,7 @@ router.delete('/:id', [auth, [
 check('question', 'Question must exist').exists(), 
 check('question', 'Question must exist in the database').custom( async (req) => {
   try {
-    let question = await Question.findById(req.user.id);
+    let question = await Question.findById(req.params.id);
 
     if(!question){
       return res.status(404).json({ msg: 'Question not found' })
@@ -84,7 +85,7 @@ check('comment', 'Must enter a comment')
   try {
     let question = await Question.findById(req.params.id);
 
-    if(question.user.toString() !== req.user.id){
+    if(question.user.toString() !== req.question.id){
       return res.status(401).json({ msg: 'Not Authorized' });
     }
 

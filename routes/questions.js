@@ -58,6 +58,8 @@ router.get(
 // @route       POST api/questions
 // @desc        Post question
 // @access      Private
+
+// @todo Fix the method to post the question: check whether the question id is unique rather than using question.
 router.post(
   '/',
   [
@@ -146,7 +148,7 @@ router.delete(
       let question = await Question.findById(req.params.id);
 
       // If the found question id is not equal to the user.id found in the request, when set to string, return a 401 status and a json
-      if (question.user.toString() !== req.user.id) {
+      if (question.user.toString() !== req.question.id) {
         return res.status(401).json({ msg: 'Not Authorized' });
       }
 
