@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
-//allows you to import this class to use as a class.
+//allows you to import this class to use as a middleware.
 //This will allow you to import auth to make sure the token is verified, and if it is, will return the user within the token.
 module.exports = function(req, res, next) {
   //Get token from header

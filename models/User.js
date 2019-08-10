@@ -17,39 +17,13 @@ const UserSchema = mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    default: this.name
   },
   date: {
     type: Date,
     default: Date.now
-  },
-  questions: [
-    {
-      question: {
-        type: String
-      },
-      class: {
-        type: String
-      },
-      likes: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'user'
-        }
-      ],
-      comments: [
-        {
-          user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'user'
-          },
-          text: {
-            type: String
-          }
-        }
-      ]
-    }
-  ]
+  }
 });
 
 // exports the model as a mongoose model called user

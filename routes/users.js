@@ -29,7 +29,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, password } = req.body;
+    const { name, email, password, username } = req.body;
 
     try {
       const user = await User.findOne({ email });
@@ -39,24 +39,25 @@ router.post(
       }
 
       // Creating a new user object with the information taken out from the body name, email and password
-      user = new User({
+      const newUser = new User({
         name,
         email,
-        password
+        password,
+        username
       });
 
       // Promise to generate a salt using bcrypt with 10 rounds
       const salt = await bcrypt.genSalt(10);
 
       // Using the salt and the bcrypt hash function to create a hash password
-      user.password = await bcrypt.hash(password, salt);
+      newUser.password = await bcrypt.hash(password, salt);
 
       // Saving the user object created above to the database
-      await user.save();
+      await newUser.save();
 
       const payload = {
         user: {
-          id: user.id
+          id: newUser.id
         }
       };
 

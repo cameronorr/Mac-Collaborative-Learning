@@ -13,7 +13,7 @@ const config = require('config');
 // @access      Private
 router.get('/', [auth], async (req, res) => {
   try {
-    const user = await user.findById(req.user.id).select('-password');
+    const user = await User.findById(req.user.id).select('-password');
     res.json(user);
   } catch (error) {
     console.error(error);
@@ -22,7 +22,7 @@ router.get('/', [auth], async (req, res) => {
 });
 
 // @route       POST to api/auth
-// @desc        Authenticate user and get the token
+// @desc        Authenticate user and get the token (Login user)
 // @access      Private
 router.post(
   '/',

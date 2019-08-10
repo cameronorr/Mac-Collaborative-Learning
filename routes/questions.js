@@ -1,51 +1,54 @@
 const express = require('express');
 const router = express.Router();
 
-const { check } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
 const Question = require('../models/Question');
+const User = require('../models/User');
+
+// @route       GET api/questions
+// @desc        Get Current Question
+// @access      Public
+router.get('/:id', async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  try {
+    let question = await Question.findById(req.params.id);
+
+    res.json(question);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+});
 
 // @route       GET api/questions
 // @desc        Get questions in a specified class code
 // @access      Public
 router.get(
   '/',
-  [
-    check('classCode', 'Class code is required').exists(),
-    check(
-      'classCode',
-      'Class code entered does not have any questions assosiated with it'
-    ).custom(async req => {
-      const { classCode } = req.body;
-      try {
-        question = await Question.findOne({ classCode });
-        if (!question) {
-          // throw new Error(
-          //   'No class code with this code has questions currently in them. Be the first to ask!'
-          // );
-          return res.status(400).json({
-            msg:
-              'No class with this code has questions currently in them. Be the first to ask!'
-          });
-        }
-      } catch (error) {
-        console.error(error.message);
-        req.status(500).send('Server Error');
-      }
-    })
-  ],
+  [check('classCode', 'Class code is required').exists()],
   async (req, res) => {
     const errors = validationResult(req);
-
-    const { className } = req.body;
 
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+
+    const { classCode } = req.body;
     try {
-      const questions = Question.find({ className }).sort({
+      let questions = await Question.find({ classCode }).sort({
         date: -1
       });
+      if (!questions) {
+        return res.status(400).json({
+          msg:
+            'No class with this code has questions currently in them. Be the first to ask!'
+        });
+      }
 
       res.json({ questions });
     } catch (error) {
@@ -66,26 +69,7 @@ router.post(
     auth,
     [
       check('classCode', 'Class code is required').exists(),
-      check('question', 'Question is required').exists(),
-      check('question', 'Question must be unique').custom(async req => {
-        try {
-          const question = await Question.findOne({
-            question: req.body.question
-          });
-          if (question) {
-            // throw new Error(
-            //   'Question must be unique: look at the existing one, or word your question slightly differently.'
-            // );
-            return req.status(400).json({
-              msg:
-                'Question must be unique: look at the existing one, or word your question slightly differently.'
-            });
-          }
-        } catch (error) {
-          console.error(error.message);
-          res.status(500).send('Server Error');
-        }
-      })
+      check('question', 'Question is required').exists()
     ]
   ],
   async (req, res) => {
@@ -95,20 +79,35 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { user, question, classCode, likes, comments } = req.body;
+    const { email, question, classCode, likes, comments } = req.body;
 
-    const newQuestion = {
-      user,
-      question,
-      classCode,
-      likes,
-      comments
-    };
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(404).json({ msg: "User doesn't exist" });
+    }
 
     try {
-      const question = await newQuestion.save();
+      const foundQuestion = await Question.findOne({ question });
+      if (foundQuestion) {
+        return res.status(400).json({
+          msg:
+            'Question must be unique: look at the existing one, or word your question slightly differently.'
+        });
+      }
 
-      res.json({ question });
+      const questionFields = {
+        user: user._id,
+        question,
+        classCode,
+        likes,
+        comments
+      };
+
+      const newQuestion = new Question(questionFields);
+
+      await newQuestion.save();
+
+      res.json({ newQuestion });
     } catch (error) {
       console.error(error.message);
       res.status(500).send('Server Error');
@@ -121,40 +120,22 @@ router.post(
 // @access      Private
 router.delete(
   '/:id',
-  [
-    auth,
-    check('question', 'Question is required').exists(),
-    check('question', 'Question must exist in the database').custom(
-      async req => {
-        try {
-          let question = await Question.findById(req.params.id);
-          if (!question) {
-            // throw new Error('Question must exist in the database');
-            return res
-              .status(404)
-              .json({ msg: 'Question must exist in the database' });
-          }
-        } catch (error) {
-          console.error(error.message);
-          res.status(500).send('Server Error');
-        }
-      }
-    )
-  ],
+  [auth, [check('question', 'Question is required').exists()]],
   async (req, res) => {
-    // @todo    find out whether to use the question (put as id) in the url, check whether the question belongs to the user, implement deleting the question
     try {
       // Finding a question in the database following the same model as Question by it's _id passed in to the backend from the front end.
       let question = await Question.findById(req.params.id);
-
+      if (!question) {
+        return res
+          .status(404)
+          .json({ msg: 'Question must exist in the database' });
+      }
       // If the found question id is not equal to the user.id found in the request, when set to string, return a 401 status and a json
-      if (question.user.toString() !== req.question.id) {
+      if (question.user.toString() !== req.user.id) {
         return res.status(401).json({ msg: 'Not Authorized' });
       }
-
       // Find the question by id again, and this time remove it from the database
-      await Question.findByIdAndRemove(res.params.id);
-
+      await Question.findByIdAndRemove(req.params.id);
       // Send back a json indicating it was removed
       res.json({ msg: 'Question Removed.' });
     } catch (error) {
