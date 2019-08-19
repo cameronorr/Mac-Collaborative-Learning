@@ -40,10 +40,10 @@ router.post(
 
       // Creating a new user object with the information taken out from the body name, email and password
       const newUser = new User({
-        name,
         email,
-        password,
-        username
+        name,
+        username,
+        password
       });
 
       // Promise to generate a salt using bcrypt with 10 rounds
@@ -78,5 +78,19 @@ router.post(
     }
   }
 );
+
+// @route       GET api/users/:id
+// @desc        Get username
+// @access      Public
+router.get('/:id', async (req, res) => {
+  try {
+    console.log('idiot');
+    const user = await User.findById(req.params.id);
+
+    res.json({ username: user.username });
+  } catch (error) {
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

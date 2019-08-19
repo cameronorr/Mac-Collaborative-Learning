@@ -11,6 +11,8 @@ const auth = require('../middleware/auth');
 router.post('/:id', auth, async (req, res) => {
   const errors = validationResult(req);
 
+  const { _id } = req.body;
+
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
@@ -18,21 +20,22 @@ router.post('/:id', auth, async (req, res) => {
   try {
     let question = await Question.findById(req.params.id);
 
+    // @TODO figure out a way to pass in the user that is trying to like the question. Maybe pass in as a req body
     if (!question) {
       return res.status(404).json({ msg: 'No question of this id exists.' });
     }
 
-    let liked = question.likes.filter(
-      like => question.user.toString() === like.user.id
-    );
+    let liked = question.likes.filter(like => _id == like);
+    console.log(question.likes);
+    console.log(_id);
 
-    if (liked[0]) {
+    if (!liked.length == 0) {
       return res
         .status(400)
         .json({ msg: 'You have already liked this question' });
     }
 
-    question.likes.unshift(question.user);
+    question.likes.unshift(_id);
     await question.save();
 
     res.json(question);

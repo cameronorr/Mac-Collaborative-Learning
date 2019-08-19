@@ -10,11 +10,6 @@ const User = require('../models/User');
 // @desc        Get Current Question
 // @access      Public
 router.get('/:id', async (req, res) => {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
   try {
     let question = await Question.findById(req.params.id);
 
@@ -28,35 +23,42 @@ router.get('/:id', async (req, res) => {
 // @route       GET api/questions
 // @desc        Get questions in a specified class code
 // @access      Public
-router.get(
-  '/',
-  [check('classCode', 'Class code is required').exists()],
-  async (req, res) => {
-    const errors = validationResult(req);
+router.get('/', async (req, res) => {
+  const errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    const { classCode } = req.body;
-    try {
-      let questions = await Question.find({ classCode }).sort({
-        date: -1
-      });
-      if (!questions) {
-        return res.status(400).json({
-          msg:
-            'No class with this code has questions currently in them. Be the first to ask!'
-        });
-      }
-
-      res.json({ questions });
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).send('Server Error');
-    }
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
-);
+
+  // const perPage = 10;
+  // const page = req.params.page || 1;
+
+  try {
+    let questions = await Question.find();
+    //   .limit(perPage)
+    //   .skip(perPage)
+    //   .sort({
+    //     date: -1
+    //   });
+
+    // const numOfQuestions = await Question.count();
+
+    // res.render('index.js', {
+    //   page: page,
+    //   pages: Math.ceil(numOfQuestions / page),
+    //   numofResults: numOfQuestions
+    // });
+    if (!questions) {
+      return res.status(400).json({
+        msg: 'No questions in the database!'
+      });
+    }
+
+    res.json({ questions });
+  } catch (error) {
+    res.status(500).send('Server Error');
+  }
+});
 
 // @route       POST api/questions
 // @desc        Post question
@@ -79,14 +81,14 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, question, classCode, likes, comments } = req.body;
-
-    const user = await User.findOne({ email: email });
-    if (!user) {
-      return res.status(404).json({ msg: "User doesn't exist" });
-    }
+    const { _id, question, classCode } = req.body;
 
     try {
+      const user = await User.findById({ _id });
+      if (!user) {
+        return res.status(404).json({ msg: "User doesn't exist" });
+      }
+
       const foundQuestion = await Question.findOne({ question });
       if (foundQuestion) {
         return res.status(400).json({
@@ -94,6 +96,9 @@ router.post(
             'Question must be unique: look at the existing one, or word your question slightly differently.'
         });
       }
+
+      const likes = [],
+        comments = [];
 
       const questionFields = {
         user: user._id,
