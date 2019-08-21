@@ -25,6 +25,7 @@ export default (state, action) => {
       return {
         ...state,
         questions: action.payload,
+        filtered: null,
         current: null,
         loading: false
       };
@@ -60,13 +61,13 @@ export default (state, action) => {
         loading: false
       };
     case FILTER_QUESTIONS:
-      console.log('rat');
       return {
         ...state,
         filtered: state.questions.filter(question => {
-          console.log(action.payload);
           const regex = new RegExp(`${action.payload}`, 'gi');
-          return question.question.match(regex);
+          return (
+            question.question.match(regex) || question.classCode.match(regex)
+          );
         })
       };
     case CLEAR_FILTER:

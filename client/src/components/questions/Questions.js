@@ -17,48 +17,32 @@ const Questions = () => {
   } = questionContext;
 
   useEffect(() => {
-    if (!filtered) {
-      getQuestions();
-    }
+    getQuestions();
   }, []);
 
-  if (questions !== null && questions.length === 0) {
+  if (questions !== null && questions.length === 0 && !loading) {
     return <h4>Be the first to ask a question!</h4>;
   }
-  return (
-    <Fragment>
-      {questions !== null && questions !== undefined && loading == false ? (
-        <TransitionGroup>
-          {filtered !== null
-            ? filtered.map(question => (
-                <CSSTransition
-                  key={question._id}
-                  timeout={500}
-                  classNames='item'
-                >
-                  <QuestionItem question={question} />
-                </CSSTransition>
-              ))
-            : questions.map(question => (
-                // the key must be in the tag first in the map, so need to put it in the css transition tag.
-                <div>
-                  {console.log(question)}
-
-                  <CSSTransition
-                    key={question._id}
-                    timeout={500}
-                    classNames='item'
-                  >
-                    <QuestionItem question={question} />
-                  </CSSTransition>
-                </div>
-              ))}
-        </TransitionGroup>
-      ) : (
-        <Spinner />
-      )}
-    </Fragment>
-  );
+  if (questions !== null && !loading) {
+    return (
+      <TransitionGroup>
+        {filtered !== null
+          ? filtered.map(question => (
+              <CSSTransition key={question._id} timeout={500} classNames='item'>
+                <QuestionItem question={question} />
+              </CSSTransition>
+            ))
+          : questions.map(question => (
+              // the key must be in the tag first in the map, so need to put it in the css transition tag.
+              <CSSTransition key={question._id} timeout={500} classNames='item'>
+                <QuestionItem question={question} />
+              </CSSTransition>
+            ))}
+      </TransitionGroup>
+    );
+  } else {
+    return <Spinner />;
+  }
 };
 
 export default Questions;
