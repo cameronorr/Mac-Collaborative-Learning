@@ -30,14 +30,19 @@ const QuestionItem = ({ question }) => {
   };
 
   const onLike = e => {
-    addLike(question, user._id);
+    if (user) {
+      addLike(question, user._id);
+    } else {
+      console.log('Please login first.');
+    }
   };
 
   // if (componentUsername) {
   return (
     <div className='card card-md set-color-white'>
       <h1>{question.question}</h1>
-      <h2 className='subtext'>Posted by {componentUsername.username}...</h2>
+      <h3 className='subtext2'>Class Code: {question.classCode}</h3>
+      <h2 className='subtext'>Posted by {componentUsername}...</h2>
       <div className='grid-2'>
         <div>
           <i className='fas fa-comment-alt' onClick={onClick} />{' '}

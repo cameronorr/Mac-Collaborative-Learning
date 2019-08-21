@@ -10,9 +10,9 @@ const Home = () => {
   const { current } = questionContext;
 
   return (
-    <div className='card card-md'>
+    <div className='container'>
       {!current ? (
-        <div className='container'>
+        <div className='card card-md'>
           <h1 style={{ marginLeft: '8.585rem' }}>
             Search a question by name or course code
           </h1>

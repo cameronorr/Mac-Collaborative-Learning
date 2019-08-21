@@ -18,12 +18,12 @@ router.post('/:id', auth, async (req, res) => {
       return res.status(400).json({ msg: 'No question found by that id' });
     }
 
-    newComment = {
+    comment2 = {
       user: req.user.id,
       text: comment
     };
 
-    question.comments.unshift(newComment);
+    question.comments.unshift(comment2);
     await question.save();
 
     res.json({ question });

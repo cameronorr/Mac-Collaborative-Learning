@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import QuestionContext from '../../context/question/questionContext';
 import AuthContext from '../../context/auth/authContext';
 
+import CommentItem from './CommentItem';
+
 import { Link } from 'react-router-dom';
 
 // Add a back button
@@ -23,6 +25,10 @@ const Question = current => {
 
   const { newComment } = comment;
 
+  // const [cUsername, setCUsername] = useState({ newCommentUsername: '' });
+
+  // const { newCommentUsername } = cUsername;
+
   useEffect(() => {
     // console.log the username
     // Probably getting the wrong res data within the function
@@ -31,16 +37,29 @@ const Question = current => {
     );
   }, []);
 
+  // const findUsername = comment => {
+  //   getUsername(comment.user).then(result => {
+  //     setCUsername({ newCommentUsername: result.username });
+  //   });
+  // };
+
   const onLike = e => {
-    addLike(question, user._id);
+    if (user) {
+      addLike(question, user._id);
+    } else {
+      console.log('Please login first.');
+    }
   };
 
   const onChange = e =>
     setComment({ ...comment, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
-    console.log(comment);
-    addComment(newComment, question._id);
+    if (user) {
+      addComment({ comment: newComment, _id: question._id });
+    } else {
+      console.log('Please login first.');
+    }
   };
 
   const onClick = () => getQuestions();
@@ -52,9 +71,9 @@ const Question = current => {
       </Link>
       <div className='card card-md'>
         <h1>{question.question}</h1>
+        <h3 className='subtext2'>Class Code: {question.classCode}</h3>
         <h2 className='subtext'>
-          Posted by{' '}
-          {componentUsername.username ? componentUsername.username : ''}...
+          Posted by {componentUsername ? componentUsername : ''}...
         </h2>
         <div className='grid-2'>
           <div>
@@ -69,9 +88,8 @@ const Question = current => {
       <div className='container'>
         {question.comments.length !== 0 ? (
           question.comments.map(comment => (
-            <div className='card card-md set-color-white'>
-              {/* <h3>Comment from {username}</h3> */}
-              <h2>{comment.text}</h2>
+            <div>
+              <CommentItem comment={comment} />
             </div>
           ))
         ) : (
@@ -80,21 +98,21 @@ const Question = current => {
       </div>
       <div>
         <h3 className='question-label'>Add a comment...</h3>
-        <form onSubmit={onSubmit}>
-          <input
-            type='text'
-            name='newComment'
-            value={newComment}
-            onChange={onChange}
-            className='text-indent'
-            required
-          />
+        <input
+          type='text'
+          name='newComment'
+          value={newComment}
+          onChange={onChange}
+          className='text-indent'
+          required
+        />
+        <Link onClick={onSubmit}>
           <input
             type='submit'
             value='Submit'
             className='btn btn-primary btn-indent2'
           />
-        </form>
+        </Link>
       </div>
     </div>
   );

@@ -78,9 +78,9 @@ const QuestionState = props => {
   };
 
   // Add Comment
-  const addComment = async (text, qid) => {
+  const addComment = async ({ comment, _id }) => {
     const body = {
-      comment: text
+      comment: comment
     };
     const config = {
       headers: {
@@ -89,8 +89,11 @@ const QuestionState = props => {
     };
 
     try {
-      const res = await axios.post(`/api/comments/${qid}`, body, config);
-      loadQuestion(qid);
+      const res = await axios.post(`/api/comments/${_id}`, body, config);
+      if (res) {
+        // has nothing to with these functions -> changes the link
+        loadQuestion(_id);
+      }
     } catch (error) {
       dispatch({ type: COMMENT_ERROR });
     }

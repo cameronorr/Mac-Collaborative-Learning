@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
+import { Redirect } from 'react-router-dom';
 
 /**
  * @todo
@@ -9,12 +10,6 @@ const Login = props => {
   const authContext = useContext(AuthContext);
 
   const { login, isAuthenticated } = authContext;
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      props.history.push('/');
-    }
-  }, [isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
     email: '',
@@ -38,47 +33,51 @@ const Login = props => {
     }
   };
 
-  return (
-    <div className='card card-md'>
-      <h2>Welcome back to</h2>
-      <h1 className='mac-header'>Mac Collaborative Learning</h1>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label htmlFor='email' className='login-label'>
-            Email:
-          </label>
-          <input
-            type='email'
-            name='email'
-            value={email}
-            onChange={onChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor='password' className='login-label'>
-            Password:{' '}
-          </label>
-          <input
-            type='password'
-            name='password'
-            value={password}
-            onChange={onChange}
-            required
-          />
-        </div>
-        <div>
-          <a href='#'>
+  if (!isAuthenticated) {
+    return (
+      <div className='card card-md'>
+        <h2>Welcome back to</h2>
+        <h1 className='mac-header'>Mac Collaborative Learning</h1>
+        <form onSubmit={onSubmit}>
+          <div>
+            <label htmlFor='email' className='login-label'>
+              Email:
+            </label>
             <input
-              type='submit'
-              value='Login'
-              className='btn btn-primary btn-block'
+              type='email'
+              name='email'
+              value={email}
+              onChange={onChange}
+              required
             />
-          </a>
-        </div>
-      </form>
-    </div>
-  );
+          </div>
+          <div>
+            <label htmlFor='password' className='login-label'>
+              Password:{' '}
+            </label>
+            <input
+              type='password'
+              name='password'
+              value={password}
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div>
+            <a href='#'>
+              <input
+                type='submit'
+                value='Login'
+                className='btn btn-primary btn-block'
+              />
+            </a>
+          </div>
+        </form>
+      </div>
+    );
+  } else {
+    return <Redirect to='/' />;
+  }
 };
 
 export default Login;

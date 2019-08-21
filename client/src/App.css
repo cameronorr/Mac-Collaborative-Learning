@@ -304,6 +304,17 @@ img {
   background: rgb(119, 153, 245);
 }
 
+.set-text-yellow {
+  text-align: left;
+  color: var(--primary-color);
+}
+
+.subtext2 {
+  text-align: left;
+  font-size: 1rem;
+  color: rgb(41, 132, 236);
+}
+
 .btn-white,
 .bg-white,
 .badge-white,

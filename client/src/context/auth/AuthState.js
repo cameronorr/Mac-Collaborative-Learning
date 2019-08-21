@@ -43,9 +43,10 @@ const AuthState = props => {
 
   const getUsername = async quid => {
     try {
-      const res = await axios.get(`/api/users/${quid}`);
-      console.log(res.data);
-      return res.data;
+      return await axios.get(`/api/users/${quid}`).then(res => {
+        console.log(res.data.username);
+        return res.data.username;
+      });
     } catch (error) {
       dispatch({ type: USER_ERROR });
     }
