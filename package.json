@@ -11,17 +11,9 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cameronorr/Mac-Collaborative-Learning.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cameronorr/Mac-Collaborative-Learning/issues"
-  },
-  "homepage": "https://github.com/cameronorr/Mac-Collaborative-Learning#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.2.2",
