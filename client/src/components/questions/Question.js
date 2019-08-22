@@ -67,7 +67,7 @@ const Question = current => {
   return (
     <div className='container'>
       <Link to='/' onClick={onClick}>
-        Back
+        <input type='submit' value='Back' className='btn' />
       </Link>
       <div className='card card-md'>
         <h1>{question.question}</h1>

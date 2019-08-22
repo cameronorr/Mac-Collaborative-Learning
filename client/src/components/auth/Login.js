@@ -40,7 +40,11 @@ const Login = props => {
         <h1 className='mac-header'>Mac Collaborative Learning</h1>
         <form onSubmit={onSubmit}>
           <div>
-            <label htmlFor='email' className='login-label'>
+            <label
+              htmlFor='email'
+              className='login-label'
+              style={{ marginLeft: '12.9rem' }}
+            >
               Email:
             </label>
             <input
@@ -49,10 +53,15 @@ const Login = props => {
               value={email}
               onChange={onChange}
               required
+              style={{ marginLeft: '12.9rem' }}
             />
           </div>
           <div>
-            <label htmlFor='password' className='login-label'>
+            <label
+              htmlFor='password'
+              className='login-label'
+              style={{ marginLeft: '12.9rem' }}
+            >
               Password:{' '}
             </label>
             <input
@@ -61,6 +70,7 @@ const Login = props => {
               value={password}
               onChange={onChange}
               required
+              style={{ marginLeft: '12.9rem' }}
             />
           </div>
           <div>
@@ -69,6 +79,7 @@ const Login = props => {
                 type='submit'
                 value='Login'
                 className='btn btn-primary btn-block'
+                style={{ marginLeft: '12.9rem' }}
               />
             </a>
           </div>

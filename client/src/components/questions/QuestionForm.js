@@ -47,39 +47,46 @@ const QuestionForm = props => {
 
   if (!submitted) {
     return (
-      <div className='card card-md set-color-blue'>
+      <div className='container'>
         <Link to='/' onClick={onClick}>
-          Back
+          <input type='submit' value='Back' className='btn' />
         </Link>
-        <form onSubmit={onSubmit}>
-          <div className='container set-color-blue'>
-            <h3 className='question-label'>Question:</h3>
+        <div className='card card-md'>
+          <form onSubmit={onSubmit}>
+            <div className='container'>
+              <h3 className='question-label' style={{ marginRight: '25.3rem' }}>
+                Question:
+              </h3>
+              <input
+                type='text'
+                name='questionText'
+                value={questionText}
+                placeholder='e.g., What is a Laplace Transform?'
+                onChange={onChange}
+                required
+              />
+            </div>
+            <div className='container'>
+              <h3 className='code-label' style={{ marginRight: '23.3rem' }}>
+                Course Code:
+              </h3>
+              <input
+                type='text'
+                name='classCode'
+                value={classCode}
+                placeholder='e.g., Math 2Z03'
+                onChange={onChange}
+                required
+              />
+            </div>
             <input
-              type='text'
-              name='questionText'
-              value={questionText}
-              placeholder='e.g., What is a Laplace Transform?'
-              onChange={onChange}
-              required
+              type='submit'
+              value='Submit'
+              className='btn btn-primary btn-indent'
+              style={{ marginLeft: '12.6rem' }}
             />
-          </div>
-          <div className='container set-color-blue'>
-            <h3 className='code-label'>Course Code:</h3>
-            <input
-              type='text'
-              name='classCode'
-              value={classCode}
-              placeholder='e.g., Math 2Z03'
-              onChange={onChange}
-              required
-            />
-          </div>
-          <input
-            type='submit'
-            value='Submit'
-            className='btn btn-primary btn-indent'
-          />
-        </form>
+          </form>
+        </div>
       </div>
     );
   } else {
