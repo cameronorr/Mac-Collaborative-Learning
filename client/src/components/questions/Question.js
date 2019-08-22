@@ -30,12 +30,11 @@ const Question = current => {
   // const { newCommentUsername } = cUsername;
 
   useEffect(() => {
-    // console.log the username
-    // Probably getting the wrong res data within the function
+    setComment({ newComment: '' });
     getUsername(question.user).then(result =>
       setUsername({ componentUsername: result })
     );
-  }, []);
+  }, [current]);
 
   // const findUsername = comment => {
   //   getUsername(comment.user).then(result => {

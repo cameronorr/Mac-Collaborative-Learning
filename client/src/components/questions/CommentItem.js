@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../context/auth/authContext';
+import QuestionContext from '../../context/question/questionContext';
 
 const CommentItem = ({ comment }) => {
   const authContext = useContext(AuthContext);
@@ -18,7 +19,7 @@ const CommentItem = ({ comment }) => {
   return (
     <div>
       <div className='card card-nh set-color-white'>
-        <h3 className='set-text-yellow' style={{ fontSize: '1em' }}>
+        <h3 className='set-text-primary' style={{ fontSize: '1em' }}>
           {newCommentUsername ? newCommentUsername : ''}
         </h3>
         <h2 style={{ textAlign: 'left', fontSize: '1em' }}>{comment.text}</h2>

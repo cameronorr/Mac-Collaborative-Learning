@@ -91,7 +91,6 @@ const QuestionState = props => {
     try {
       const res = await axios.post(`/api/comments/${_id}`, body, config);
       if (res) {
-        // has nothing to with these functions -> changes the link
         loadQuestion(_id);
       }
     } catch (error) {
@@ -113,7 +112,7 @@ const QuestionState = props => {
       const res = await axios.post(`/api/votes/${question._id}`, body, config);
 
       if (res) {
-        getQuestions();
+        loadQuestion(question._id);
       }
     } catch (error) {
       dispatch({ type: QUESTION_ERROR });

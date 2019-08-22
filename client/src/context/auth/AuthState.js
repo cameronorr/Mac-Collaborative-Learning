@@ -98,8 +98,6 @@ const AuthState = props => {
     }
   };
 
-  // Login User
-
   // Logout
   const logout = () => dispatch({ type: LOGOUT });
 

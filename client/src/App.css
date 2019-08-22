@@ -320,7 +320,7 @@ img {
   background: rgb(119, 153, 245);
 }
 
-.set-text-yellow {
+.set-text-primary {
   text-align: left;
   color: var(--primary-color);
 }
