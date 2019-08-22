@@ -28,6 +28,7 @@ const QuestionFilter = () => {
         type='text'
         placeholder='Filter Questions...'
         onChange={onChange}
+        style={{ marginLeft: '13.5rem' }}
       />
     </form>
   );

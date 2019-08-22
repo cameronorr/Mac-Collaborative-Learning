@@ -53,6 +53,9 @@ const QuestionForm = props => {
         </Link>
         <div className='card card-md'>
           <form onSubmit={onSubmit}>
+            <h2 style={{ fontSize: '2em' }}>
+              Enter a question and course code:
+            </h2>
             <div className='container'>
               <h3 className='question-label' style={{ marginRight: '25.3rem' }}>
                 Question:

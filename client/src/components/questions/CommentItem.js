@@ -17,11 +17,11 @@ const CommentItem = ({ comment }) => {
 
   return (
     <div>
-      <div className='card card-md set-color-white'>
-        <h3 className='set-text-yellow'>
+      <div className='card card-nh set-color-white'>
+        <h3 className='set-text-yellow' style={{ fontSize: '1em' }}>
           {newCommentUsername ? newCommentUsername : ''}
         </h3>
-        <h2 style={{ textAlign: 'left' }}>{comment.text}</h2>
+        <h2 style={{ textAlign: 'left', fontSize: '1em' }}>{comment.text}</h2>
       </div>
     </div>
   );

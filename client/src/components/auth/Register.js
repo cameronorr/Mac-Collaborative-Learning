@@ -54,7 +54,7 @@ const Register = props => {
 
   if (!isAuthenticated) {
     return (
-      <div className='card card-md'>
+      <div className='card card-lg'>
         <h2>Welcome to</h2>
         <h1 className='mac-header'>Mac Collaborative Learning</h1>
         <form onSubmit={onSubmit}>

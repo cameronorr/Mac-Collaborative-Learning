@@ -69,34 +69,36 @@ const Question = current => {
       <Link to='/' onClick={onClick}>
         <input type='submit' value='Back' className='btn' />
       </Link>
-      <div className='card card-md'>
-        <h1>{question.question}</h1>
-        <h3 className='subtext2'>Class Code: {question.classCode}</h3>
-        <h2 className='subtext'>
-          Posted by {componentUsername ? componentUsername : ''}...
-        </h2>
-        <div className='grid-2'>
-          <div>
-            <i className='fas fa-comment-alt' /> {question.comments.length}
-          </div>
-          <div>
-            <i className='far fa-arrow-alt-circle-up' onClick={onLike} />{' '}
-            {question.likes.length}
+      <div style={{ background: 'rgb(244, 242, 239)', borderRadius: '10px' }}>
+        <div className='card card-nh'>
+          <h1>{question.question}</h1>
+          <h3 className='subtext2'>Class Code: {question.classCode}</h3>
+          <h2 className='subtext'>
+            Posted by {componentUsername ? componentUsername : ''}...
+          </h2>
+          <div className='grid-2'>
+            <div>
+              <i className='fas fa-comment-alt' /> {question.comments.length}
+            </div>
+            <div>
+              <i className='far fa-arrow-alt-circle-up' onClick={onLike} />{' '}
+              {question.likes.length}
+            </div>
           </div>
         </div>
+        <div className='container'>
+          {question.comments.length !== 0 ? (
+            question.comments.map(comment => (
+              <div>
+                <CommentItem comment={comment} />
+              </div>
+            ))
+          ) : (
+            <h2>No comments...</h2>
+          )}
+        </div>
       </div>
-      <div className='container'>
-        {question.comments.length !== 0 ? (
-          question.comments.map(comment => (
-            <div>
-              <CommentItem comment={comment} />
-            </div>
-          ))
-        ) : (
-          <h2>No comments...</h2>
-        )}
-      </div>
-      <div>
+      <div style={{ marginTop: '1.5rem' }}>
         <h3 className='question-label'>Add a comment...</h3>
         <input
           type='text'
@@ -110,7 +112,7 @@ const Question = current => {
           <input
             type='submit'
             value='Submit'
-            className='btn btn-primary btn-indent2'
+            className='btn btn-primary btn-indent2 btn:hover'
           />
         </Link>
       </div>

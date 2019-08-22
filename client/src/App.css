@@ -72,6 +72,22 @@ img {
   background-color: rgb(244, 242, 239);
 }
 
+.card-md:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.card-nh {
+  border: 1px solid #eee6f8;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 5px 7.5px hsla(0, 0%, 0%, 0.2);
+  -moz-box-shadow: 0 5px 7.5px hsla(0, 0%, 0%, 0.2);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.19);
+  padding: 20px;
+  background-color: rgb(244, 242, 239);
+}
+
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
@@ -326,6 +342,7 @@ img {
 
 .btn:hover {
   opacity: 0.8;
+  background-color: rgb(145, 142, 142);
 }
 
 .bg-light,

@@ -37,12 +37,13 @@ const QuestionItem = ({ question }) => {
     }
   };
 
-  // if (componentUsername) {
   return (
     <div className='card card-md set-color-white'>
-      <h1>{question.question}</h1>
-      <h3 className='subtext2'>Class Code: {question.classCode}</h3>
-      <h2 className='subtext'>Posted by {componentUsername}...</h2>
+      <div onClick={onClick}>
+        <h1>{question.question}</h1>
+        <h3 className='subtext2'>Class Code: {question.classCode}</h3>
+        <h2 className='subtext'>Posted by {componentUsername}...</h2>
+      </div>
       <div className='grid-2'>
         <div>
           <i className='fas fa-comment-alt' onClick={onClick} />{' '}
@@ -55,9 +56,6 @@ const QuestionItem = ({ question }) => {
       </div>
     </div>
   );
-  // } else {
-  //   return <Spinner />;
-  // }
 };
 
 export default QuestionItem;

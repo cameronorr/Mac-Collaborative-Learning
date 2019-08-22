@@ -12,8 +12,8 @@ const Home = () => {
   return (
     <div className='container'>
       {!current ? (
-        <div className='card card-md'>
-          <h1 style={{ marginLeft: '8.585rem' }}>
+        <div className='card card-lg'>
+          <h1 style={{ marginLeft: '9.8rem' }}>
             Search a question by name or course code
           </h1>
           <QuestionFilter />
