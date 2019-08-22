@@ -51,7 +51,7 @@ const QuestionForm = props => {
         <Link to='/' onClick={onClick}>
           <input type='submit' value='Back' className='btn' />
         </Link>
-        <div className='card card-md'>
+        <div className='card card-nh'>
           <form onSubmit={onSubmit}>
             <h2 style={{ fontSize: '2em' }}>
               Enter a question and course code:
