@@ -61,7 +61,7 @@ const Register = props => {
           <label
             htmlFor='email'
             className='login-label'
-            style={{ marginLeft: '12.7rem' }}
+            style={{ marginLeft: '16.5rem' }}
           >
             Email:
           </label>
@@ -72,12 +72,12 @@ const Register = props => {
             placeholder='john@gmail.com'
             onChange={onChange}
             required
-            style={{ marginLeft: '12.7rem' }}
+            style={{ marginLeft: '16.5rem' }}
           />
           <label
             htmlFor='name'
             className='login-label'
-            style={{ marginLeft: '12.7rem' }}
+            style={{ marginLeft: '16.5rem' }}
           >
             Name:
           </label>
@@ -88,12 +88,12 @@ const Register = props => {
             placeholder='Johnny Appleseed'
             onChange={onChange}
             required
-            style={{ marginLeft: '12.7rem' }}
+            style={{ marginLeft: '16.5rem' }}
           />
           <label
             htmlFor='username'
             className='login-label'
-            style={{ marginLeft: '12.7rem' }}
+            style={{ marginLeft: '16.5rem' }}
           >
             Username:
           </label>
@@ -103,12 +103,12 @@ const Register = props => {
             value={username}
             placeholder='(Optional - Will just be set to your name if none entered.)'
             onChange={onChange}
-            style={{ marginLeft: '12.7rem' }}
+            style={{ marginLeft: '16.5rem' }}
           />
           <label
             htmlFor='email'
             className='login-label'
-            style={{ marginLeft: '12.7rem' }}
+            style={{ marginLeft: '16.5rem' }}
           >
             Password:
           </label>
@@ -118,12 +118,12 @@ const Register = props => {
             value={password}
             onChange={onChange}
             required
-            style={{ marginLeft: '12.7rem' }}
+            style={{ marginLeft: '16.5rem' }}
           />
           <label
             htmlFor='email'
             className='login-label'
-            style={{ marginLeft: '12.7rem' }}
+            style={{ marginLeft: '16.5rem' }}
           >
             Confirm Password:
           </label>
@@ -133,13 +133,13 @@ const Register = props => {
             value={confirmPassword}
             onChange={onChange}
             required
-            style={{ marginLeft: '12.7rem' }}
+            style={{ marginLeft: '16.5rem' }}
           />
           <input
             type='submit'
             value='Register'
             className='btn btn-primary btn-block'
-            style={{ marginLeft: '12.7rem' }}
+            style={{ marginLeft: '16.5rem' }}
           />
         </form>
       </div>

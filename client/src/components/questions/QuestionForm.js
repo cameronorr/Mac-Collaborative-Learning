@@ -64,6 +64,7 @@ const QuestionForm = props => {
                 placeholder='e.g., What is a Laplace Transform?'
                 onChange={onChange}
                 required
+                style={{ marginLeft: '12.3rem' }}
               />
             </div>
             <div className='container'>
@@ -77,13 +78,14 @@ const QuestionForm = props => {
                 placeholder='e.g., Math 2Z03'
                 onChange={onChange}
                 required
+                style={{ marginLeft: '12.3rem' }}
               />
             </div>
             <input
               type='submit'
               value='Submit'
               className='btn btn-primary btn-indent'
-              style={{ marginLeft: '12.6rem' }}
+              style={{ marginLeft: '14.3rem' }}
             />
           </form>
         </div>

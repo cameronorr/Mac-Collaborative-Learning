@@ -43,7 +43,7 @@ const Login = props => {
             <label
               htmlFor='email'
               className='login-label'
-              style={{ marginLeft: '12.9rem' }}
+              style={{ marginLeft: '16.5rem' }}
             >
               Email:
             </label>
@@ -53,14 +53,14 @@ const Login = props => {
               value={email}
               onChange={onChange}
               required
-              style={{ marginLeft: '12.9rem' }}
+              style={{ marginLeft: '16.5rem' }}
             />
           </div>
           <div>
             <label
               htmlFor='password'
               className='login-label'
-              style={{ marginLeft: '12.9rem' }}
+              style={{ marginLeft: '16.5rem' }}
             >
               Password:{' '}
             </label>
@@ -70,7 +70,7 @@ const Login = props => {
               value={password}
               onChange={onChange}
               required
-              style={{ marginLeft: '12.9rem' }}
+              style={{ marginLeft: '16.5rem' }}
             />
           </div>
           <div>
@@ -79,7 +79,7 @@ const Login = props => {
                 type='submit'
                 value='Login'
                 className='btn btn-primary btn-block'
-                style={{ marginLeft: '12.9rem' }}
+                style={{ marginLeft: '16.5rem' }}
               />
             </a>
           </div>
