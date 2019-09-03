@@ -11,7 +11,7 @@ import {
 } from '../types';
 
 export default (state, action) => {
-  console.log(action);
+  console.log(action.type);
   switch (action.type) {
     // case GET_USERNAME:
     //   return {

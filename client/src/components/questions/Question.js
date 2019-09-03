@@ -34,6 +34,7 @@ const Question = current => {
     getUsername(question.user).then(result =>
       setUsername({ componentUsername: result })
     );
+    // eslint-disable-next-line
   }, [current]);
 
   // const findUsername = comment => {

@@ -14,7 +14,6 @@ router.get('/:id', async (req, res) => {
     let question = await Question.findById(req.params.id);
 
     res.json(question);
-    console.log(question);
   } catch (error) {
     console.error(error);
     res.status(500).send('Server Error');

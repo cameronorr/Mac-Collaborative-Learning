@@ -1,13 +1,11 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
-import setAuthToken from '../../utils/setAuthToken';
 import {
   QUESTION_ERROR,
   CLEAR_FILTER,
   ADD_QUESTION,
   LOAD_QUESTION,
   LOAD_QUESTION_FAIL,
-  ADD_LIKE,
   FILTER_QUESTIONS,
   GET_QUESTIONS,
   COMMENT_ERROR

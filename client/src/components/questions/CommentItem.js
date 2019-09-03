@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../context/auth/authContext';
-import QuestionContext from '../../context/question/questionContext';
 
 const CommentItem = ({ comment }) => {
   const authContext = useContext(AuthContext);
@@ -14,6 +13,7 @@ const CommentItem = ({ comment }) => {
     getUsername(comment.user).then(result =>
       setCUsername({ newCommentUsername: result })
     );
+    // eslint-disable-next-line
   }, []);
 
   return (

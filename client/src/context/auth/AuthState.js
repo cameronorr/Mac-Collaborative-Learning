@@ -30,7 +30,6 @@ const AuthState = props => {
   const loadUser = async () => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
-      console.log(localStorage.token);
     }
 
     try {
@@ -44,7 +43,6 @@ const AuthState = props => {
   const getUsername = async quid => {
     try {
       return await axios.get(`/api/users/${quid}`).then(res => {
-        console.log(res.data.username);
         return res.data.username;
       });
     } catch (error) {
@@ -54,7 +52,6 @@ const AuthState = props => {
 
   // Log user in
   const login = async formData => {
-    console.log('rat');
     const config = {
       headers: {
         'Content-Type': 'application/json'

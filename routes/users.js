@@ -29,7 +29,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, password, username } = req.body;
+    const { name, email, password, username = name } = req.body;
 
     try {
       const user = await User.findOne({ email });
@@ -84,7 +84,6 @@ router.post(
 // @access      Public
 router.get('/:id', async (req, res) => {
   try {
-    console.log('idiot');
     const user = await User.findById(req.params.id);
 
     res.json({ username: user.username });

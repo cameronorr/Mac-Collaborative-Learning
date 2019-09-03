@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import QuestionContext from '../../context/question/questionContext';
 import QuestionItem from './QuestionItem';
@@ -8,16 +8,11 @@ import Spinner from '../layout/Spinner';
 const Questions = () => {
   const questionContext = useContext(QuestionContext);
 
-  const {
-    questions,
-    filtered,
-    loading,
-    getQuestions,
-    filterQuestions
-  } = questionContext;
+  const { questions, filtered, loading, getQuestions } = questionContext;
 
   useEffect(() => {
     getQuestions();
+    // eslint-disable-next-line
   }, []);
 
   if (questions !== null && questions.length === 0 && !loading) {

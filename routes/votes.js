@@ -26,8 +26,6 @@ router.post('/:id', auth, async (req, res) => {
     }
 
     let liked = question.likes.filter(like => _id == like);
-    console.log(question.likes);
-    console.log(_id);
 
     if (!liked.length == 0) {
       return res

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import { Redirect } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
  * @todo
  * - implement alerts -> when the user submits their information, send an alert with the text currently in the console.log
  */
-const Login = props => {
+const Login = () => {
   const authContext = useContext(AuthContext);
 
   const { login, isAuthenticated } = authContext;
@@ -74,6 +74,7 @@ const Login = props => {
             />
           </div>
           <div>
+            {/* eslint-disable-next-line */}
             <a href='#'>
               <input
                 type='submit'

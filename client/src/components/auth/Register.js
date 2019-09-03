@@ -1,16 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import authContext from '../../context/auth/authContext';
 import { Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
-const Register = props => {
+const Register = () => {
   const AuthContext = useContext(authContext);
-
-  //   const [state, setState] = useState({
-  //       redirect: false
-  //   })
-
-  //   const { redirect } = state;
 
   const { register, isAuthenticated } = AuthContext;
   const [question, setQuestion] = useState({
@@ -22,10 +15,6 @@ const Register = props => {
   });
 
   const { email, name, username, password, confirmPassword } = question;
-
-  //   useEffect(() => {
-
-  //   }, [isAuthenticated]);
 
   const onChange = e =>
     setQuestion({ ...question, [e.target.name]: e.target.value });
@@ -42,11 +31,17 @@ const Register = props => {
       confirmPassword === ''
     ) {
       console.log('Please fill out all fields.');
-    } else {
+    } else if (username) {
       register({
         email,
         name,
         username,
+        password
+      });
+    } else {
+      register({
+        email,
+        name,
         password
       });
     }

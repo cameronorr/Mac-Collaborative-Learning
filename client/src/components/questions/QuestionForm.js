@@ -1,10 +1,10 @@
-import React, { useRef, useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import QuestionContext from '../../context/question/questionContext';
 import AuthContext from '../../context/auth/authContext';
 
 import { Redirect, Link } from 'react-router-dom';
 
-const QuestionForm = props => {
+const QuestionForm = () => {
   const questionContext = useContext(QuestionContext);
   const authContext = useContext(AuthContext);
 

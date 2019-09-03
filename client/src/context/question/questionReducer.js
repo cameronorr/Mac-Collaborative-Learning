@@ -1,7 +1,5 @@
-import React from 'react';
 import {
   FILTER_QUESTIONS,
-  QUESTION_ERROR,
   CLEAR_FILTER,
   GET_QUESTIONS,
   ADD_QUESTION,
@@ -15,7 +13,6 @@ export default (state, action) => {
   switch (action.type) {
     // Add the question
     case ADD_QUESTION:
-      console.log(action);
       return {
         ...state,
         questions: [action.payload, ...state.questions],
@@ -30,7 +27,6 @@ export default (state, action) => {
         loading: false
       };
     case LOAD_QUESTION:
-      console.log(action.payload.data);
       return {
         ...state,
         current: action.payload.data,

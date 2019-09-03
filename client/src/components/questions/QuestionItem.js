@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import QuestionContext from '../../context/question/questionContext';
 import AuthContext from '../../context/auth/authContext';
-import Spinner from '../../components/layout/Spinner';
 
 const QuestionItem = ({ question }) => {
   const questionContext = useContext(QuestionContext);
@@ -18,11 +17,10 @@ const QuestionItem = ({ question }) => {
 
   // Everytime the QuestionItem is rendered
   useEffect(() => {
-    // console.log the username
-    // Probably getting the wrong res data within the function
     getUsername(question.user).then(result =>
       setUsername({ componentUsername: result })
     );
+    // eslint-disable-next-line
   }, []);
 
   const onClick = e => {
