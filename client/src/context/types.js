@@ -14,5 +14,6 @@ export const GET_USERNAME = 'GET_USERNAME';
 export const USER_ERROR = 'USER_ERROR';
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const ADD_COMMENT = 'ADD_COMMENT';
 export const COMMENT_ERROR = 'COMMENT_ERROR';
 export const LOGOUT = 'LOGOUT';

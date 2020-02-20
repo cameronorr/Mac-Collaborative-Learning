@@ -8,7 +8,8 @@ import {
   LOAD_QUESTION_FAIL,
   FILTER_QUESTIONS,
   GET_QUESTIONS,
-  COMMENT_ERROR
+  COMMENT_ERROR,
+  ADD_COMMENT
 } from '../types';
 import QuestionReducer from './questionReducer';
 import QuestionContext from './questionContext';
@@ -69,6 +70,7 @@ const QuestionState = props => {
   const loadQuestion = async qid => {
     try {
       const res = await axios.get(`/api/questions/${qid}`);
+      console.log(res);
       dispatch({ type: LOAD_QUESTION, payload: res });
     } catch (error) {
       dispatch({ type: LOAD_QUESTION_FAIL });
@@ -89,6 +91,7 @@ const QuestionState = props => {
     try {
       const res = await axios.post(`/api/comments/${_id}`, body, config);
       if (res) {
+        dispatch({ type: ADD_COMMENT, payload: body.comment });
         loadQuestion(_id);
       }
     } catch (error) {

@@ -5,6 +5,7 @@ import AuthContext from '../../context/auth/authContext';
 import CommentItem from './CommentItem';
 
 import { Link } from 'react-router-dom';
+import Questions from './Questions';
 
 // Add a back button
 const Question = current => {
@@ -64,10 +65,17 @@ const Question = current => {
 
   const onClick = () => getQuestions();
 
+  const mapComments = () => {
+    let map = [];
+    for(let i = 0; i < question.comments.length; i++)
+      map.push(<CommentItem comment={question.comments[i]} />)
+    return map;
+  }
+
   return (
     <div className='container'>
       <Link to='/' onClick={onClick}>
-        <input type='submit' value='Back' className='btn' />
+        <input type='submit' value='Back' className='btn' style={{ borderRadius: '15%' }}/>
       </Link>
       <div style={{ background: 'rgb(244, 242, 239)', borderRadius: '10px' }}>
         <div className='card card-nh'>
@@ -88,11 +96,7 @@ const Question = current => {
         </div>
         <div className='container'>
           {question.comments.length !== 0 ? (
-            question.comments.map(comment => (
-              <div>
-                <CommentItem comment={comment} />
-              </div>
-            ))
+            <div>{mapComments()}</div>
           ) : (
             <h2>No comments...</h2>
           )}

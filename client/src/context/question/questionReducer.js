@@ -5,7 +5,8 @@ import {
   ADD_QUESTION,
   LOAD_QUESTION,
   LOAD_QUESTION_FAIL,
-  ADD_LIKE
+  ADD_LIKE,
+  ADD_COMMENT
 } from '../types';
 
 export default (state, action) => {
@@ -18,6 +19,11 @@ export default (state, action) => {
         questions: [action.payload, ...state.questions],
         loading: false
       };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        comments: [...state.current.comments, action.payload]
+      }
     case GET_QUESTIONS:
       return {
         ...state,
