@@ -29,6 +29,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Sets port to 5000 if there is no other port set.
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5500;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
